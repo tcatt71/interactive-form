@@ -1,6 +1,7 @@
 const nameField = document.querySelector('#name');
 const otherJobRoleField = document.querySelector('#other-job-role');
 const jobRoleDropDownMenu = document.querySelector('#title');
+const colorDropDownMenu = document.querySelector('#color');
 
 nameField.focus();
 otherJobRoleField.hidden = true;
@@ -14,3 +15,5 @@ function toggleOtherJobRoleField() {
     otherJobRoleField.hidden = true;
   }
 }
+
+colorDropDownMenu.disabled = true;
