@@ -48,14 +48,27 @@ registerForActivitesFieldset.addEventListener('change', updateCostOfAttendance);
 
 function updateCostOfAttendance(e) {
   const activitiesCostParagraph = document.querySelector('#activities-cost');
-  const checkBox = e.target;
-  const activityCost = parseInt(checkBox.dataset.cost);
+  const activities = document.querySelectorAll('#activities [type="checkbox"]');
+  const checkbox = e.target;
+  const activityCost = parseInt(checkbox.dataset.cost);
   let totalCost = parseInt(activitiesCostParagraph.textContent.substring(8));
 
-  if (checkBox.checked) {
+  if (checkbox.checked) {
+    for (const activity of activities) {
+      if ((activity.dataset.dayAndTime === checkbox.dataset.dayAndTime) && (activity.name !== checkbox.name)) {
+        activity.disabled = true;
+        activity.parentElement.classList.add('disabled');
+      }
+    }
     totalCost += activityCost;
     activitiesCostParagraph.textContent = `Total: $${totalCost}`;
   } else {
+    for (const activity of activities) {
+      if ((activity.dataset.dayAndTime === checkbox.dataset.dayAndTime) && (activity.name !== checkbox.name)) {
+        activity.disabled = false;
+        activity.parentElement.classList.remove('disabled');
+      }
+    }
     totalCost -= activityCost;
     activitiesCostParagraph.textContent = `Total: $${totalCost}`;
   }
