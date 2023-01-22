@@ -26,12 +26,12 @@ function selectTShirtColorByTheme() {
   const optionElements = colorDropDownMenu.options;
 
   if (designDropDownMenu.value === 'js puns') {
-    displayTShirtsOfSelectedTheme('js puns', 'cornflowerblue');
+    displayTShirtsOptions('js puns', 'cornflowerblue');
   } else {
-    displayTShirtsOfSelectedTheme('heart js', 'tomato');
+    displayTShirtsOptions('heart js', 'tomato');
   }
 
-  function displayTShirtsOfSelectedTheme(theme, optionValue) {
+  function displayTShirtsOptions(theme, optionValue) {
     for (const option of optionElements) {
       if (option.dataset.theme === theme) {
         option.hidden = false;
