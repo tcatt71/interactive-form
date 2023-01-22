@@ -18,9 +18,9 @@ function toggleOtherJobRoleField() {
   }
 }
 
-designDropDownMenu.addEventListener('change', selectTShirtTheme);
+designDropDownMenu.addEventListener('change', selectTShirtColorByTheme);
 
-function selectTShirtTheme() {
+function selectTShirtColorByTheme() {
   colorDropDownMenu.disabled = false;
 
   const optionElements = colorDropDownMenu.options;
