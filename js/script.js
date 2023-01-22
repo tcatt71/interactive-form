@@ -3,6 +3,7 @@ const otherJobRoleField = document.querySelector('#other-job-role');
 const jobRoleDropDownMenu = document.querySelector('#title');
 const colorDropDownMenu = document.querySelector('#color');
 const designDropDownMenu = document.querySelector('#design');
+const registerForActivitesFieldset = document.querySelector('#activities');
 
 nameField.focus();
 otherJobRoleField.hidden = true;
@@ -40,5 +41,22 @@ function selectTShirtColorByTheme() {
         option.hidden = true;
       }
     }
+  }
+}
+
+registerForActivitesFieldset.addEventListener('change', updateCostOfAttendance);
+
+function updateCostOfAttendance(e) {
+  const activitiesCostParagraph = document.querySelector('#activities-cost');
+  const checkBox = e.target;
+  const activityCost = parseInt(checkBox.dataset.cost);
+  let totalCost = parseInt(activitiesCostParagraph.textContent.substring(8));
+
+  if (checkBox.checked) {
+    totalCost += activityCost;
+    activitiesCostParagraph.textContent = `Total: $${totalCost}`;
+  } else {
+    totalCost -= activityCost;
+    activitiesCostParagraph.textContent = `Total: $${totalCost}`;
   }
 }
