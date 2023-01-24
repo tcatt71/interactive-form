@@ -13,6 +13,9 @@ nameField.focus();
 otherJobRoleField.hidden = true;
 colorDropDownMenu.disabled = true;
 creditCArdOptionElement.selected = true;
+paypalDiv.hidden = true;
+bitcoinDiv.hidden = true;
+
 
 jobRoleDropDownMenu.addEventListener('change', toggleOtherJobRoleField);
 
