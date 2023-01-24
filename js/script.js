@@ -5,10 +5,14 @@ const colorDropDownMenu = document.querySelector('#color');
 const designDropDownMenu = document.querySelector('#design');
 const registerForActivitesFieldset = document.querySelector('#activities');
 const paymentMethodDropDownMenu = document.querySelector('#payment');
+const creditCArdOptionElement = paymentMethodDropDownMenu.querySelector('option[value="credit-card"]');
+const paypalDiv = document.querySelector('#paypal');
+const bitcoinDiv = document.querySelector('#bitcoin');
 
 nameField.focus();
 otherJobRoleField.hidden = true;
 colorDropDownMenu.disabled = true;
+creditCArdOptionElement.selected = true;
 
 jobRoleDropDownMenu.addEventListener('change', toggleOtherJobRoleField);
 
@@ -79,8 +83,6 @@ paymentMethodDropDownMenu.addEventListener('change', dispalyPaymentOptionFields)
 
 function dispalyPaymentOptionFields() {
   const creditCardDiv = document.querySelector('#credit-card');
-  const paypalDiv = document.querySelector('#paypal');
-  const bitcoinDiv = document.querySelector('#bitcoin');
 
   if (paymentMethodDropDownMenu.value === 'credit-card') {
     creditCardDiv.hidden = false;
