@@ -4,6 +4,7 @@ const jobRoleDropDownMenu = document.querySelector('#title');
 const colorDropDownMenu = document.querySelector('#color');
 const designDropDownMenu = document.querySelector('#design');
 const registerForActivitesFieldset = document.querySelector('#activities');
+const paymentMethodDropDownMenu = document.querySelector('#payment');
 
 nameField.focus();
 otherJobRoleField.hidden = true;
@@ -71,5 +72,27 @@ function updateCostOfAttendance(e) {
     }
     totalCost -= activityCost;
     activitiesCostParagraph.textContent = `Total: $${totalCost}`;
+  }
+}
+
+paymentMethodDropDownMenu.addEventListener('change', dispalyPaymentOptionFields);
+
+function dispalyPaymentOptionFields() {
+  const creditCardDiv = document.querySelector('#credit-card');
+  const paypalDiv = document.querySelector('#paypal');
+  const bitcoinDiv = document.querySelector('#bitcoin');
+
+  if (paymentMethodDropDownMenu.value === 'credit-card') {
+    creditCardDiv.hidden = false;
+    paypalDiv.hidden = true;
+    bitcoinDiv.hidden = true;
+  } else if (paymentMethodDropDownMenu.value === 'paypal') {
+    creditCardDiv.hidden = true;
+    paypalDiv.hidden = false;
+    bitcoinDiv.hidden = true;
+  } else {
+    creditCardDiv.hidden = true;
+    paypalDiv.hidden = true;
+    bitcoinDiv.hidden = false;
   }
 }
