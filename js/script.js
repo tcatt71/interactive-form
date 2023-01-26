@@ -108,6 +108,8 @@ formElement.addEventListener('submit', validateForm);
 function validateForm(e) {
   if (!nameIsValid()) {
     e.preventDefault();
+  } else if (!emailIsValid()) {
+    e.preventDefault()
   }
   e.preventDefault();
 }
@@ -115,5 +117,13 @@ function validateForm(e) {
 function nameIsValid() {
   const isValid = /\S/.test(nameField.value)
   console.log('name', isValid);
+  return isValid;
+}
+
+function emailIsValid() {
+  const emailField = document.querySelector('#email');
+
+  const isValid = /^\w+\.?\w+@\w+\.com$/i.test(emailField.value);
+  console.log('email', isValid);
   return isValid;
 }
