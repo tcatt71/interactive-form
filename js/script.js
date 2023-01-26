@@ -8,6 +8,7 @@ const paymentMethodDropDownMenu = document.querySelector('#payment');
 const creditCArdOptionElement = paymentMethodDropDownMenu.querySelector('option[value="credit-card"]');
 const paypalDiv = document.querySelector('#paypal');
 const bitcoinDiv = document.querySelector('#bitcoin');
+const formElement = document.querySelector('form');
 
 nameField.focus();
 otherJobRoleField.hidden = true;
@@ -100,4 +101,19 @@ function dispalyPaymentOptionFields() {
     paypalDiv.hidden = true;
     bitcoinDiv.hidden = false;
   }
+}
+
+formElement.addEventListener('submit', validateForm);
+
+function validateForm(e) {
+  if (!nameFieldIsValid()) {
+    e.preventDefault();
+  }
+  e.preventDefault();
+}
+
+function nameFieldIsValid() {
+  const isValid = /\S/.test(nameField.value)
+  console.log('name', isValid);
+  return isValid;
 }
