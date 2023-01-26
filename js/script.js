@@ -110,6 +110,8 @@ function validateForm(e) {
     e.preventDefault();
   } else if (!emailIsValid()) {
     e.preventDefault()
+  } else if (!registerForActivitiesIsChecked()) {
+    e.preventDefault();
   }
   e.preventDefault();
 }
@@ -126,4 +128,19 @@ function emailIsValid() {
   const isValid = /^\w+\.?\w+@\w+\.com$/i.test(emailField.value);
   console.log('email', isValid);
   return isValid;
+}
+
+function registerForActivitiesIsChecked() {
+  const checkboxes = document.querySelectorAll('#activities-box [type="checkbox"]');
+
+  for (const checkbox of checkboxes) {
+    if (checkbox.checked) {
+      console.log('checkbox checked', true);
+      return true;
+    } else {
+      console.log('checkbox checked', false);
+    }
+  }
+  console.log('checkbox checked', false);
+  return false;
 }
