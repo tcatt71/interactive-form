@@ -128,8 +128,9 @@ function nameIsValid() {
 
 function emailIsValid() {
   const emailField = document.querySelector('#email');
+  const email = emailField.value;
 
-  const isValid = /^\w+\.?\w+@\w+\.com$/i.test(emailField.value);
+  const isValid = /^\w+\.?\w+@\w+\.com$/i.test(email);
   console.log('email', isValid);
   return isValid;
 }
