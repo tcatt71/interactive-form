@@ -151,7 +151,9 @@ function registerForActivitiesIsChecked() {
 }
 
 function creditCardNumberIsValid() {
-  const creditCardNumber = document.querySelector('#cc-num').value;
+  const creditCardNumberfield = document.querySelector('#cc-num');
+  const creditCardNumber = creditCardNumberfield.value;
+
   console.log(creditCardNumber);
   const isValid = /^\d{13,16}$/.test(creditCardNumber)
   console.log('credit card', isValid);
