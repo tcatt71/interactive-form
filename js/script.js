@@ -112,6 +112,8 @@ function validateForm(e) {
     e.preventDefault()
   } else if (!registerForActivitiesIsChecked()) {
     e.preventDefault();
+  } else if (!creditCardNumberIsValid()) {
+    e.preventDefault();
   }
   e.preventDefault();
 }
@@ -143,4 +145,12 @@ function registerForActivitiesIsChecked() {
   }
   console.log('checkbox checked', false);
   return false;
+}
+
+function creditCardNumberIsValid() {
+  const creditCardNumber = document.querySelector('#cc-num').value;
+  console.log(creditCardNumber);
+  const isValid = /^\d{13,16}$/.test(creditCardNumber)
+  console.log('credit card', isValid);
+  return isValid;
 }
