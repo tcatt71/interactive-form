@@ -119,7 +119,9 @@ function validateForm(e) {
 }
 
 function nameIsValid() {
-  const isValid = /\S/.test(nameField.value)
+  const name = nameField.value;
+
+  const isValid = /\S/.test(name)
   console.log('name', isValid);
   return isValid;
 }
