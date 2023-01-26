@@ -106,13 +106,13 @@ function dispalyPaymentOptionFields() {
 formElement.addEventListener('submit', validateForm);
 
 function validateForm(e) {
-  if (!nameFieldIsValid()) {
+  if (!nameIsValid()) {
     e.preventDefault();
   }
   e.preventDefault();
 }
 
-function nameFieldIsValid() {
+function nameIsValid() {
   const isValid = /\S/.test(nameField.value)
   console.log('name', isValid);
   return isValid;
