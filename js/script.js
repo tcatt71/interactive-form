@@ -115,79 +115,86 @@ function validateForm(e) {
     e.preventDefault();
   }
   e.preventDefault();
-}
 
-function nameIsValid() {
-  const name = nameField.value;
+  function nameIsValid() {
+    const name = nameField.value;
 
-  const isValid = /\S/.test(name)
-  console.log('name', isValid);
-  return isValid;
-}
+    const isValid = /\S/.test(name)
+    console.log('name', isValid);
+    return isValid;
+  }
 
-function emailIsValid() {
-  const emailField = document.querySelector('#email');
-  const email = emailField.value;
+  function emailIsValid() {
+    const emailField = document.querySelector('#email');
+    const email = emailField.value;
 
-  const isValid = /^\w+\.?\w+@\w+\.com$/i.test(email);
-  console.log('email', isValid);
-  return isValid;
-}
+    const isValid = /^\w+\.?\w+@\w+\.com$/i.test(email);
+    console.log('email', isValid);
+    return isValid;
+  }
 
-function registerForActivitiesIsChecked() {
-  const checkboxes = document.querySelectorAll('#activities-box [type="checkbox"]');
+  function registerForActivitiesIsChecked() {
+    const checkboxes = document.querySelectorAll('#activities-box [type="checkbox"]');
 
-  for (const checkbox of checkboxes) {
-    if (checkbox.checked) {
-      console.log('checkbox checked', true);
-      return true;
-    } else {
-      console.log('checkbox checked', false);
+    for (const checkbox of checkboxes) {
+      if (checkbox.checked) {
+        console.log('checkbox checked', true);
+        return true;
+      } else {
+        console.log('checkbox checked', false);
+      }
+    }
+    console.log('checkbox checked', false);
+    return false;
+  }
+
+  function creditCardIsValid() {
+    if (!creditCardDiv.hidden) {
+      if (!creditCardNumberIsValid()) {
+        return false;
+      } else if (!zipCodeIsValid()) {
+        return false;
+      } else if (!cvvIsValid()) {
+        return false;
+      } else {
+        console.log('Credit card', true);
+        return true;
+      }
+    }
+
+    function creditCardNumberIsValid() {
+      const creditCardNumberfield = document.querySelector('#cc-num');
+      const creditCardNumber = creditCardNumberfield.value;
+
+      console.log(creditCardNumber);
+      const isValid = /^\d{13,16}$/.test(creditCardNumber)
+      console.log('credit card number', isValid);
+      return isValid;
+    }
+
+    function zipCodeIsValid() {
+      const zipCodeField = document.querySelector('#zip');
+      const zipCode = zipCodeField.value;
+
+      const isValid = /^\d{5}$/.test(zipCode);
+      console.log('zip code', isValid);
+      return isValid;
+    }
+
+    function cvvIsValid() {
+      const cvvField = document.querySelector('#cvv');
+      const cvv = cvvField.value;
+
+      const isValid = /^\d{3}$/.test(cvv);
+      console.log('cvv', isValid);
+      return isValid;
     }
   }
-  console.log('checkbox checked', false);
-  return false;
 }
 
-function creditCardIsValid() {
-  if (!creditCardDiv.hidden) {
-    if (!creditCardNumberIsValid()) {
-      return false;
-    } else if (!zipCodeIsValid()) {
-      return false;
-    } else if (!cvvIsValid()) {
-      return false;
-    } else {
-      console.log('Credit card', true);
-      return true;
-    }
-  }
 
-  function creditCardNumberIsValid() {
-    const creditCardNumberfield = document.querySelector('#cc-num');
-    const creditCardNumber = creditCardNumberfield.value;
 
-    console.log(creditCardNumber);
-    const isValid = /^\d{13,16}$/.test(creditCardNumber)
-    console.log('credit card number', isValid);
-    return isValid;
-  }
 
-  function zipCodeIsValid() {
-    const zipCodeField = document.querySelector('#zip');
-    const zipCode = zipCodeField.value;
 
-    const isValid = /^\d{5}$/.test(zipCode);
-    console.log('zip code', isValid);
-    return isValid;
-  }
 
-  function cvvIsValid() {
-    const cvvField = document.querySelector('#cvv');
-    const cvv = cvvField.value;
 
-    const isValid = /^\d{3}$/.test(cvv);
-    console.log('cvv', isValid);
-    return isValid;
-  }
-}
