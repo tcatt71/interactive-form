@@ -149,25 +149,6 @@ function registerForActivitiesIsChecked() {
   return false;
 }
 
-function creditCardNumberIsValid() {
-  const creditCardNumberfield = document.querySelector('#cc-num');
-  const creditCardNumber = creditCardNumberfield.value;
-
-  console.log(creditCardNumber);
-  const isValid = /^\d{13,16}$/.test(creditCardNumber)
-  console.log('credit card number', isValid);
-  return isValid;
-}
-
-function zipCodeIsValid() {
-  const zipCodeField = document.querySelector('#zip');
-  const zipCode = zipCodeField.value;
-
-  const isValid = /^\d{5}$/.test(zipCode);
-  console.log('zip code', isValid);
-  return isValid;
-}
-
 function creditCardIsValid() {
   if (!creditCardDiv.hidden) {
     if (!creditCardNumberIsValid()) {
@@ -178,5 +159,24 @@ function creditCardIsValid() {
       console.log('Credit card', true);
       return true;
     }
+  }
+
+  function creditCardNumberIsValid() {
+    const creditCardNumberfield = document.querySelector('#cc-num');
+    const creditCardNumber = creditCardNumberfield.value;
+
+    console.log(creditCardNumber);
+    const isValid = /^\d{13,16}$/.test(creditCardNumber)
+    console.log('credit card number', isValid);
+    return isValid;
+  }
+
+  function zipCodeIsValid() {
+    const zipCodeField = document.querySelector('#zip');
+    const zipCode = zipCodeField.value;
+
+    const isValid = /^\d{5}$/.test(zipCode);
+    console.log('zip code', isValid);
+    return isValid;
   }
 }
