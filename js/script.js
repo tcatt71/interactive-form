@@ -114,7 +114,6 @@ function validateForm(e) {
   } else if (!creditCardIsValid()) {
     e.preventDefault();
   }
-  e.preventDefault();
 
   function nameIsValid() {
     const name = nameField.value;
