@@ -121,7 +121,6 @@ function validateForm(e) {
     const name = nameField.value;
 
     const isValid = /\S/.test(name)
-    console.log('name', isValid);
     return isValid;
   }
 
@@ -130,7 +129,6 @@ function validateForm(e) {
     const email = emailField.value;
 
     const isValid = /^\w+\.?\w+@\w+\.com$/i.test(email);
-    console.log('email', isValid);
     return isValid;
   }
 
@@ -139,13 +137,9 @@ function validateForm(e) {
 
     for (const checkbox of checkboxes) {
       if (checkbox.checked) {
-        console.log('checkbox checked', true);
         return true;
-      } else {
-        console.log('checkbox checked', false);
       }
     }
-    console.log('checkbox checked', false);
     return false;
   }
 
@@ -158,7 +152,6 @@ function validateForm(e) {
       } else if (!cvvIsValid()) {
         return false;
       } else {
-        console.log('Credit card', true);
         return true;
       }
     }
@@ -167,9 +160,7 @@ function validateForm(e) {
       const creditCardNumberfield = document.querySelector('#cc-num');
       const creditCardNumber = creditCardNumberfield.value;
 
-      console.log(creditCardNumber);
       const isValid = /^\d{13,16}$/.test(creditCardNumber)
-      console.log('credit card number', isValid);
       return isValid;
     }
 
@@ -178,7 +169,6 @@ function validateForm(e) {
       const zipCode = zipCodeField.value;
 
       const isValid = /^\d{5}$/.test(zipCode);
-      console.log('zip code', isValid);
       return isValid;
     }
 
@@ -187,7 +177,6 @@ function validateForm(e) {
       const cvv = cvvField.value;
 
       const isValid = /^\d{3}$/.test(cvv);
-      console.log('cvv', isValid);
       return isValid;
     }
   }
