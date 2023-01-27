@@ -155,6 +155,8 @@ function creditCardIsValid() {
       return false;
     } else if (!zipCodeIsValid()) {
       return false;
+    } else if (!cvvIsValid()) {
+      return false;
     } else {
       console.log('Credit card', true);
       return true;
@@ -177,6 +179,15 @@ function creditCardIsValid() {
 
     const isValid = /^\d{5}$/.test(zipCode);
     console.log('zip code', isValid);
+    return isValid;
+  }
+
+  function cvvIsValid() {
+    const cvvField = document.querySelector('#cvv');
+    const cvv = cvvField.value;
+
+    const isValid = /^\d{3}$/.test(cvv);
+    console.log('cvv', isValid);
     return isValid;
   }
 }
