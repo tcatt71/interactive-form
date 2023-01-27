@@ -6,6 +6,7 @@ const designDropDownMenu = document.querySelector('#design');
 const registerForActivitesFieldset = document.querySelector('#activities');
 const paymentMethodDropDownMenu = document.querySelector('#payment');
 const creditCArdOptionElement = paymentMethodDropDownMenu.querySelector('option[value="credit-card"]');
+const creditCardDiv = document.querySelector('#credit-card');
 const paypalDiv = document.querySelector('#paypal');
 const bitcoinDiv = document.querySelector('#bitcoin');
 const formElement = document.querySelector('form');
@@ -86,8 +87,6 @@ function updateCostOfAttendance(e) {
 paymentMethodDropDownMenu.addEventListener('change', dispalyPaymentOptionFields);
 
 function dispalyPaymentOptionFields() {
-  const creditCardDiv = document.querySelector('#credit-card');
-
   if (paymentMethodDropDownMenu.value === 'credit-card') {
     creditCardDiv.hidden = false;
     paypalDiv.hidden = true;
@@ -112,7 +111,7 @@ function validateForm(e) {
     e.preventDefault()
   } else if (!registerForActivitiesIsChecked()) {
     e.preventDefault();
-  } else if (!creditCardNumberIsValid()) {
+  } else if (!creditCardIsValid()) {
     e.preventDefault();
   }
   e.preventDefault();
@@ -156,6 +155,28 @@ function creditCardNumberIsValid() {
 
   console.log(creditCardNumber);
   const isValid = /^\d{13,16}$/.test(creditCardNumber)
-  console.log('credit card', isValid);
+  console.log('credit card number', isValid);
   return isValid;
+}
+
+function zipCodeIsValid() {
+  const zipCodeField = document.querySelector('#zip');
+  const zipCode = zipCodeField.value;
+
+  const isValid = /^\d{5}$/.test(zipCode);
+  console.log('zip code', isValid);
+  return isValid;
+}
+
+function creditCardIsValid() {
+  if (!creditCardDiv.hidden) {
+    if (!creditCardNumberIsValid()) {
+      return false;
+    } else if (!zipCodeIsValid()) {
+      return false;
+    } else {
+      console.log('Credit card', true);
+      return true;
+    }
+  }
 }
