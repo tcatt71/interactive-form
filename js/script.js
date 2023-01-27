@@ -111,8 +111,10 @@ function validateForm(e) {
     e.preventDefault()
   } else if (!registerForActivitiesIsChecked()) {
     e.preventDefault();
-  } else if (!creditCardIsValid()) {
-    e.preventDefault();
+  } else if (!creditCardDiv.hidden) {
+    if (!creditCardIsValid()) {
+      e.preventDefault();
+    }
   }
 
   function nameIsValid() {
