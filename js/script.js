@@ -4,6 +4,7 @@ const jobRoleDropDownMenu = document.querySelector('#title');
 const colorDropDownMenu = document.querySelector('#color');
 const designDropDownMenu = document.querySelector('#design');
 const registerForActivitesFieldset = document.querySelector('#activities');
+const activities = document.querySelectorAll('#activities-box [type="checkbox"]');
 const paymentMethodDropDownMenu = document.querySelector('#payment');
 const creditCArdOptionElement = paymentMethodDropDownMenu.querySelector('option[value="credit-card"]');
 const creditCardDiv = document.querySelector('#credit-card');
@@ -17,7 +18,14 @@ colorDropDownMenu.disabled = true;
 creditCArdOptionElement.selected = true;
 paypalDiv.hidden = true;
 bitcoinDiv.hidden = true;
+styleFocusStatesOfActivities();
 
+function styleFocusStatesOfActivities() {
+  for (const activity of activities) {
+    activity.addEventListener('focus', () => activity.parentElement.classList.add('focus'));
+    activity.addEventListener('blur', () => activity.parentElement.classList.remove('focus'));
+  }
+}
 
 jobRoleDropDownMenu.addEventListener('change', toggleOtherJobRoleField);
 
@@ -58,7 +66,6 @@ registerForActivitesFieldset.addEventListener('change', updateCostOfAttendance);
 
 function updateCostOfAttendance(e) {
   const activitiesCostParagraph = document.querySelector('#activities-cost');
-  const activities = document.querySelectorAll('#activities [type="checkbox"]');
   const checkbox = e.target;
   const activityCost = parseInt(checkbox.dataset.cost);
   let totalCost = parseInt(activitiesCostParagraph.textContent.substring(8));
