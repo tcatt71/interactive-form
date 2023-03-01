@@ -112,15 +112,82 @@ function dispalyPaymentOptionFields() {
 formElement.addEventListener('submit', validateForm);
 
 function validateForm(e) {
-  if (!nameIsValid()) {
+  const emailField = document.querySelector('#email');
+  const activitiesBoxDiv = document.querySelector('#activities-box');
+
+  function validationPass(element) {
+    element.parentElement.classList.remove('not-valid');
+    element.parentElement.classList.add('valid');
+    element.parentElement.lastElementChild.style.display = 'none';
+  }
+
+  function validationFail(element) {
     e.preventDefault();
-  } else if (!emailIsValid()) {
-    e.preventDefault()
-  } else if (!registerForActivitiesIsChecked()) {
-    e.preventDefault();
-  } else if (!creditCardDiv.hidden) {
-    if (!creditCardIsValid()) {
-      e.preventDefault();
+    element.parentElement.classList.remove('valid');
+    element.parentElement.classList.add('not-valid');
+    element.parentElement.lastElementChild.style.display = 'block';
+  }
+
+  if (nameIsValid()) {
+    validationPass(nameField);
+  } else {
+    validationFail(nameField);
+  }
+
+  if (emailIsValid()) {
+    validationPass(emailField);
+  } else {
+    validationFail(emailField);
+  }
+
+  if (registerForActivitiesIsChecked()) {
+    validationPass(activitiesBoxDiv);
+  } else {
+    validationFail(activitiesBoxDiv);
+  }
+
+  if (!creditCardDiv.hidden) {
+    const creditCardNumberfield = document.querySelector('#cc-num');
+    const zipCodeField = document.querySelector('#zip');
+    const cvvField = document.querySelector('#cvv');
+
+    if (creditCardNumberIsValid()) {
+      validationPass(creditCardNumberfield);
+    } else {
+      validationFail(creditCardNumberfield);
+    }
+
+    if (zipCodeIsValid()) {
+      validationPass(zipCodeField);
+    } else {
+      validationFail(zipCodeField);
+    }
+
+    if (cvvIsValid()) {
+      validationPass(cvvField);
+    } else {
+      validationFail(cvvField);
+    }
+
+    function creditCardNumberIsValid() {
+      const creditCardNumber = creditCardNumberfield.value;
+
+      const isValid = /^\d{13,16}$/.test(creditCardNumber)
+      return isValid;
+    }
+
+    function zipCodeIsValid() {
+      const zipCode = zipCodeField.value;
+
+      const isValid = /^\d{5}$/.test(zipCode);
+      return isValid;
+    }
+
+    function cvvIsValid() {
+      const cvv = cvvField.value;
+
+      const isValid = /^\d{3}$/.test(cvv);
+      return isValid;
     }
   }
 
@@ -132,7 +199,6 @@ function validateForm(e) {
   }
 
   function emailIsValid() {
-    const emailField = document.querySelector('#email');
     const email = emailField.value;
 
     const isValid = /^\w+\.?\w+@\w+\.com$/i.test(email);
@@ -149,49 +215,4 @@ function validateForm(e) {
     }
     return false;
   }
-
-  function creditCardIsValid() {
-    if (!creditCardDiv.hidden) {
-      if (!creditCardNumberIsValid()) {
-        return false;
-      } else if (!zipCodeIsValid()) {
-        return false;
-      } else if (!cvvIsValid()) {
-        return false;
-      } else {
-        return true;
-      }
-    }
-
-    function creditCardNumberIsValid() {
-      const creditCardNumberfield = document.querySelector('#cc-num');
-      const creditCardNumber = creditCardNumberfield.value;
-
-      const isValid = /^\d{13,16}$/.test(creditCardNumber)
-      return isValid;
-    }
-
-    function zipCodeIsValid() {
-      const zipCodeField = document.querySelector('#zip');
-      const zipCode = zipCodeField.value;
-
-      const isValid = /^\d{5}$/.test(zipCode);
-      return isValid;
-    }
-
-    function cvvIsValid() {
-      const cvvField = document.querySelector('#cvv');
-      const cvv = cvvField.value;
-
-      const isValid = /^\d{3}$/.test(cvv);
-      return isValid;
-    }
-  }
 }
-
-
-
-
-
-
-
