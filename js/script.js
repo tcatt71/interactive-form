@@ -115,13 +115,13 @@ function validateForm(e) {
   const emailField = document.querySelector('#email');
   const activitiesBoxDiv = document.querySelector('#activities-box');
 
-  function validationPass(element) {
+  function handleValidInput(element) {
     element.parentElement.classList.remove('not-valid');
     element.parentElement.classList.add('valid');
     element.parentElement.lastElementChild.style.display = 'none';
   }
 
-  function validationFail(element) {
+  function handleInvalidInput(element) {
     e.preventDefault();
     element.parentElement.classList.remove('valid');
     element.parentElement.classList.add('not-valid');
@@ -129,21 +129,21 @@ function validateForm(e) {
   }
 
   if (nameIsValid()) {
-    validationPass(nameField);
+    handleValidInput(nameField);
   } else {
-    validationFail(nameField);
+    handleInvalidInput(nameField);
   }
 
   if (emailIsValid()) {
-    validationPass(emailField);
+    handleValidInput(emailField);
   } else {
-    validationFail(emailField);
+    handleInvalidInput(emailField);
   }
 
   if (registerForActivitiesIsChecked()) {
-    validationPass(activitiesBoxDiv);
+    handleValidInput(activitiesBoxDiv);
   } else {
-    validationFail(activitiesBoxDiv);
+    handleInvalidInput(activitiesBoxDiv);
   }
 
   if (!creditCardDiv.hidden) {
@@ -152,21 +152,21 @@ function validateForm(e) {
     const cvvField = document.querySelector('#cvv');
 
     if (creditCardNumberIsValid()) {
-      validationPass(creditCardNumberfield);
+      handleValidInput(creditCardNumberfield);
     } else {
-      validationFail(creditCardNumberfield);
+      handleInvalidInput(creditCardNumberfield);
     }
 
     if (zipCodeIsValid()) {
-      validationPass(zipCodeField);
+      handleValidInput(zipCodeField);
     } else {
-      validationFail(zipCodeField);
+      handleInvalidInput(zipCodeField);
     }
 
     if (cvvIsValid()) {
-      validationPass(cvvField);
+      handleValidInput(cvvField);
     } else {
-      validationFail(cvvField);
+      handleInvalidInput(cvvField);
     }
 
     function creditCardNumberIsValid() {
