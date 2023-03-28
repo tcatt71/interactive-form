@@ -214,7 +214,11 @@ function emailIsValid(eventObj) {
 
   if (isValid) {
     handleValidInput(emailField);
+  } else if (email === '') {
+    emailField.parentElement.lastElementChild.textContent = 'Please enter an email address';
+    handleInvalidInput(emailField, eventObj);
   } else {
+    emailField.parentElement.lastElementChild.textContent = 'Email address must be formatted correctly';
     handleInvalidInput(emailField, eventObj);
   }
   return isValid;
