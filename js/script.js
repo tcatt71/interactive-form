@@ -12,7 +12,7 @@ const paypalDiv = document.querySelector('#paypal');
 const bitcoinDiv = document.querySelector('#bitcoin');
 const formElement = document.querySelector('form');
 const emailField = document.querySelector('#email');
-const creditCardNumberfield = document.querySelector('#cc-num');
+const creditCardNumberField = document.querySelector('#cc-num');
 const zipCodeField = document.querySelector('#zip');
 const cvvField = document.querySelector('#cvv');
 const activitiesBoxDiv = document.querySelector('#activities-box');
@@ -137,9 +137,9 @@ function validateForm(eventObj) {
 
   if (!creditCardDiv.hidden) {
     if (creditCardNumberIsValid(eventObj)) {
-      handleValidInput(creditCardNumberfield);
+      handleValidInput(creditCardNumberField);
     } else {
-      handleInvalidInput(creditCardNumberfield, eventObj);
+      handleInvalidInput(creditCardNumberField, eventObj);
     }
 
     if (zipCodeIsValid(eventObj)) {
@@ -209,17 +209,17 @@ function registerForActivitiesIsChecked(eventObj) {
   }
 }
 
-creditCardNumberfield.addEventListener('keyup', creditCardNumberIsValid);
+creditCardNumberField.addEventListener('keyup', creditCardNumberIsValid);
 
 function creditCardNumberIsValid(eventObj) {
-  const creditCardNumber = creditCardNumberfield.value;
+  const creditCardNumber = creditCardNumberField.value;
 
   const isValid = /^\d{13,16}$/.test(creditCardNumber)
 
   if (isValid) {
-    handleValidInput(creditCardNumberfield);
+    handleValidInput(creditCardNumberField);
   } else {
-    handleInvalidInput(creditCardNumberfield, eventObj);
+    handleInvalidInput(creditCardNumberField, eventObj);
   }
   return isValid;
 }
