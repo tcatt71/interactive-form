@@ -138,6 +138,12 @@ function validateForm(eventObj) {
   if (!creditCardDiv.hidden) {
     const cvvField = document.querySelector('#cvv');
 
+    if (creditCardNumberIsValid(eventObj)) {
+      handleValidInput(creditCardNumberfield);
+    } else {
+      handleInvalidInput(creditCardNumberfield, eventObj);
+    }
+
     if (zipCodeIsValid(eventObj)) {
       handleValidInput(zipCodeField);
     } else {
