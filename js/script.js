@@ -12,6 +12,7 @@ const paypalDiv = document.querySelector('#paypal');
 const bitcoinDiv = document.querySelector('#bitcoin');
 const formElement = document.querySelector('form');
 const emailField = document.querySelector('#email');
+const creditCardNumberfield = document.querySelector('#cc-num');
 
 nameField.focus();
 otherJobRoleField.hidden = true;
@@ -134,15 +135,8 @@ function validateForm(eventObj) {
   }
 
   if (!creditCardDiv.hidden) {
-    const creditCardNumberfield = document.querySelector('#cc-num');
     const zipCodeField = document.querySelector('#zip');
     const cvvField = document.querySelector('#cvv');
-
-    if (creditCardNumberIsValid()) {
-      handleValidInput(creditCardNumberfield);
-    } else {
-      handleInvalidInput(creditCardNumberfield, eventObj);
-    }
 
     if (zipCodeIsValid()) {
       handleValidInput(zipCodeField);
@@ -154,13 +148,6 @@ function validateForm(eventObj) {
       handleValidInput(cvvField);
     } else {
       handleInvalidInput(cvvField, eventObj);
-    }
-
-    function creditCardNumberIsValid() {
-      const creditCardNumber = creditCardNumberfield.value;
-
-      const isValid = /^\d{13,16}$/.test(creditCardNumber)
-      return isValid;
     }
 
     function zipCodeIsValid() {
@@ -220,6 +207,21 @@ function emailIsValid(eventObj) {
   } else {
     emailField.parentElement.lastElementChild.textContent = 'Email address must be formatted correctly';
     handleInvalidInput(emailField, eventObj);
+  }
+  return isValid;
+}
+
+creditCardNumberfield.addEventListener('keyup', creditCardNumberIsValid);
+
+function creditCardNumberIsValid(eventObj) {
+  const creditCardNumber = creditCardNumberfield.value;
+
+  const isValid = /^\d{13,16}$/.test(creditCardNumber)
+
+  if (isValid) {
+    handleValidInput(creditCardNumberfield);
+  } else {
+    handleInvalidInput(creditCardNumberfield, eventObj);
   }
   return isValid;
 }
