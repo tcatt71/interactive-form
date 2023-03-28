@@ -14,6 +14,7 @@ const formElement = document.querySelector('form');
 const emailField = document.querySelector('#email');
 const creditCardNumberfield = document.querySelector('#cc-num');
 const zipCodeField = document.querySelector('#zip');
+const cvvField = document.querySelector('#cvv');
 
 nameField.focus();
 otherJobRoleField.hidden = true;
@@ -136,8 +137,6 @@ function validateForm(eventObj) {
   }
 
   if (!creditCardDiv.hidden) {
-    const cvvField = document.querySelector('#cvv');
-
     if (creditCardNumberIsValid(eventObj)) {
       handleValidInput(creditCardNumberfield);
     } else {
@@ -150,17 +149,10 @@ function validateForm(eventObj) {
       handleInvalidInput(zipCodeField, eventObj);
     }
 
-    if (cvvIsValid()) {
+    if (cvvIsValid(eventObj)) {
       handleValidInput(cvvField);
     } else {
       handleInvalidInput(cvvField, eventObj);
-    }
-
-    function cvvIsValid() {
-      const cvv = cvvField.value;
-
-      const isValid = /^\d{3}$/.test(cvv);
-      return isValid;
     }
   }
 
@@ -236,6 +228,21 @@ function zipCodeIsValid(eventObj) {
     handleValidInput(zipCodeField);
   } else {
     handleInvalidInput(zipCodeField, eventObj);
+  }
+  return isValid;
+}
+
+cvvField.addEventListener('keyup', cvvIsValid);
+
+function cvvIsValid(eventObj) {
+  const cvv = cvvField.value;
+
+  const isValid = /^\d{3}$/.test(cvv);
+
+  if (isValid) {
+    handleValidInput(cvvField);
+  } else {
+    handleInvalidInput(cvvField, eventObj);
   }
   return isValid;
 }
