@@ -69,9 +69,9 @@ function selectTShirtColorByTheme() {
 
 registerForActivitesFieldset.addEventListener('change', updateCostOfAttendance);
 
-function updateCostOfAttendance(e) {
+function updateCostOfAttendance(eventObj) {
   const activitiesCostParagraph = document.querySelector('#activities-cost');
-  const checkbox = e.target;
+  const checkbox = eventObj.target;
   const activityCost = parseInt(checkbox.dataset.cost);
   let totalCost = parseInt(activitiesCostParagraph.textContent.substring(8));
 
