@@ -15,6 +15,7 @@ const emailField = document.querySelector('#email');
 const creditCardNumberfield = document.querySelector('#cc-num');
 const zipCodeField = document.querySelector('#zip');
 const cvvField = document.querySelector('#cvv');
+const activitiesBoxDiv = document.querySelector('#activities-box');
 
 nameField.focus();
 otherJobRoleField.hidden = true;
@@ -116,8 +117,6 @@ function dispalyPaymentOptionFields() {
 formElement.addEventListener('submit', validateForm);
 
 function validateForm(eventObj) {
-  const activitiesBoxDiv = document.querySelector('#activities-box');
-
   if (nameIsValid(eventObj)) {
     handleValidInput(nameField);
   } else {
@@ -130,7 +129,7 @@ function validateForm(eventObj) {
     handleInvalidInput(emailField, eventObj);
   }
 
-  if (registerForActivitiesIsChecked()) {
+  if (registerForActivitiesIsChecked(eventObj)) {
     handleValidInput(activitiesBoxDiv);
   } else {
     handleInvalidInput(activitiesBoxDiv, eventObj);
@@ -154,17 +153,6 @@ function validateForm(eventObj) {
     } else {
       handleInvalidInput(cvvField, eventObj);
     }
-  }
-
-  function registerForActivitiesIsChecked() {
-    const checkboxes = document.querySelectorAll('#activities-box [type="checkbox"]');
-
-    for (const checkbox of checkboxes) {
-      if (checkbox.checked) {
-        return true;
-      }
-    }
-    return false;
   }
 }
 
@@ -200,6 +188,25 @@ function emailIsValid(eventObj) {
     handleInvalidInput(emailField, eventObj);
   }
   return isValid;
+}
+
+activitiesBoxDiv.addEventListener('change', registerForActivitiesIsChecked);
+
+function registerForActivitiesIsChecked(eventObj) {
+  const checkboxes = document.querySelectorAll('#activities-box [type="checkbox"]');
+  let isValid = false;
+
+  for (const checkbox of checkboxes) {
+    if (checkbox.checked) {
+      isValid = true;
+    }
+  }
+
+  if (isValid) {
+    handleValidInput(activitiesBoxDiv);
+  } else {
+    handleInvalidInput(activitiesBoxDiv, eventObj);
+  }
 }
 
 creditCardNumberfield.addEventListener('keyup', creditCardNumberIsValid);
