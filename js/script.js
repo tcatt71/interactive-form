@@ -11,6 +11,7 @@ const creditCardDiv = document.querySelector('#credit-card');
 const paypalDiv = document.querySelector('#paypal');
 const bitcoinDiv = document.querySelector('#bitcoin');
 const formElement = document.querySelector('form');
+const emailField = document.querySelector('#email');
 
 nameField.focus();
 otherJobRoleField.hidden = true;
@@ -111,39 +112,25 @@ function dispalyPaymentOptionFields() {
 
 formElement.addEventListener('submit', validateForm);
 
-function validateForm(e) {
-  const emailField = document.querySelector('#email');
+function validateForm(eventObj) {
   const activitiesBoxDiv = document.querySelector('#activities-box');
 
-  function handleValidInput(element) {
-    element.parentElement.classList.remove('not-valid');
-    element.parentElement.classList.add('valid');
-    element.parentElement.lastElementChild.style.display = 'none';
-  }
-
-  function handleInvalidInput(element) {
-    e.preventDefault();
-    element.parentElement.classList.remove('valid');
-    element.parentElement.classList.add('not-valid');
-    element.parentElement.lastElementChild.style.display = 'block';
-  }
-
-  if (nameIsValid()) {
+  if (nameIsValid(eventObj)) {
     handleValidInput(nameField);
   } else {
-    handleInvalidInput(nameField);
+    handleInvalidInput(nameField, eventObj);
   }
 
-  if (emailIsValid()) {
+  if (emailIsValid(eventObj)) {
     handleValidInput(emailField);
   } else {
-    handleInvalidInput(emailField);
+    handleInvalidInput(emailField, eventObj);
   }
 
   if (registerForActivitiesIsChecked()) {
     handleValidInput(activitiesBoxDiv);
   } else {
-    handleInvalidInput(activitiesBoxDiv);
+    handleInvalidInput(activitiesBoxDiv, eventObj);
   }
 
   if (!creditCardDiv.hidden) {
@@ -154,19 +141,19 @@ function validateForm(e) {
     if (creditCardNumberIsValid()) {
       handleValidInput(creditCardNumberfield);
     } else {
-      handleInvalidInput(creditCardNumberfield);
+      handleInvalidInput(creditCardNumberfield, eventObj);
     }
 
     if (zipCodeIsValid()) {
       handleValidInput(zipCodeField);
     } else {
-      handleInvalidInput(zipCodeField);
+      handleInvalidInput(zipCodeField, eventObj);
     }
 
     if (cvvIsValid()) {
       handleValidInput(cvvField);
     } else {
-      handleInvalidInput(cvvField);
+      handleInvalidInput(cvvField, eventObj);
     }
 
     function creditCardNumberIsValid() {
@@ -191,20 +178,6 @@ function validateForm(e) {
     }
   }
 
-  function nameIsValid() {
-    const name = nameField.value;
-
-    const isValid = /\S/.test(name)
-    return isValid;
-  }
-
-  function emailIsValid() {
-    const email = emailField.value;
-
-    const isValid = /^\w+\.?\w+@\w+\.com$/i.test(email);
-    return isValid;
-  }
-
   function registerForActivitiesIsChecked() {
     const checkboxes = document.querySelectorAll('#activities-box [type="checkbox"]');
 
@@ -215,4 +188,47 @@ function validateForm(e) {
     }
     return false;
   }
+}
+
+nameField.addEventListener('keyup', nameIsValid);
+
+function nameIsValid(eventObj) {
+  const name = nameField.value;
+
+  const isValid = /\S/.test(name)
+
+  if (isValid) {
+    handleValidInput(nameField);
+  } else {
+    handleInvalidInput(nameField, eventObj);
+  }
+  return isValid;
+}
+
+emailField.addEventListener('keyup', emailIsValid);
+
+function emailIsValid(eventObj) {
+  const email = emailField.value;
+
+  const isValid = /^\w+\.?\w+@\w+\.com$/i.test(email);
+
+  if (isValid) {
+    handleValidInput(emailField);
+  } else {
+    handleInvalidInput(emailField, eventObj);
+  }
+  return isValid;
+}
+
+function handleValidInput(element) {
+  element.parentElement.classList.remove('not-valid');
+  element.parentElement.classList.add('valid');
+  element.parentElement.lastElementChild.style.display = 'none';
+}
+
+function handleInvalidInput(element, eventObj) {
+  eventObj.preventDefault();
+  element.parentElement.classList.remove('valid');
+  element.parentElement.classList.add('not-valid');
+  element.parentElement.lastElementChild.style.display = 'block';
 }
