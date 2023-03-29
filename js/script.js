@@ -176,7 +176,7 @@ emailField.addEventListener('keyup', emailIsValid);
 function emailIsValid(eventObj) {
   const email = emailField.value;
 
-  const isValid = /^\w+\.?\w+@\w+\.com$/i.test(email);
+  const isValid = /^\w+\.?\w+@\w+\.(com|net|org)$/i.test(email);
 
   if (isValid) {
     handleValidInput(emailField);
