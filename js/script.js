@@ -207,6 +207,7 @@ function registerForActivitiesIsChecked(eventObj) {
   } else {
     handleInvalidInput(activitiesBoxDiv, eventObj);
   }
+  return isValid;
 }
 
 creditCardNumberField.addEventListener('keyup', creditCardNumberIsValid);
