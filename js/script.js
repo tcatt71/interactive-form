@@ -25,6 +25,7 @@ paypalDiv.hidden = true;
 bitcoinDiv.hidden = true;
 styleFocusStatesOfActivities();
 
+/** Makes focus states for each activity more apparent. */
 function styleFocusStatesOfActivities() {
   for (const activity of activities) {
     activity.addEventListener('focus', () => activity.parentElement.classList.add('focus'));
@@ -34,6 +35,7 @@ function styleFocusStatesOfActivities() {
 
 jobRoleDropDownMenu.addEventListener('change', toggleOtherJobRoleField);
 
+/** Display the 'other job role' input field if the 'other' option element is selected and hides it if another option element is selected. */
 function toggleOtherJobRoleField() {
   if (jobRoleDropDownMenu.value === 'other') {
     otherJobRoleField.hidden = false;
@@ -44,6 +46,7 @@ function toggleOtherJobRoleField() {
 
 designDropDownMenu.addEventListener('change', selectTShirtColorByTheme);
 
+/** Reveals the t-shirt color options available of selected theme. */
 function selectTShirtColorByTheme() {
   colorDropDownMenu.disabled = false;
 
@@ -55,6 +58,11 @@ function selectTShirtColorByTheme() {
     displayTShirtsOptions('heart js', 'tomato');
   }
 
+  /**
+   * Displays the selected theme's available t-shirt colors and sets a given color to be selected in the select element.
+   * @param {string} theme - The theme of the t-shirt.
+   * @param {string} optionValue - The color of the t-shirt to be selected in the select element.
+   */
   function displayTShirtsOptions(theme, optionValue) {
     for (const option of optionElements) {
       if (option.dataset.theme === theme) {
@@ -69,6 +77,10 @@ function selectTShirtColorByTheme() {
 
 registerForActivitesFieldset.addEventListener('change', updateCostOfAttendance);
 
+/**
+ * Calculates the cost of attendance by adding or subtracting the cost of activities checked or unchecked.
+ * @param {Object} event - The event object passed to the function.
+ */
 function updateCostOfAttendance(event) {
   const activitiesCostParagraph = document.querySelector('#activities-cost');
   const checkbox = event.target;
@@ -98,6 +110,7 @@ function updateCostOfAttendance(event) {
 
 paymentMethodDropDownMenu.addEventListener('change', dispalyPaymentOptionFields);
 
+/** Displays appropriate payment method section based on the users choice of options from the user payment drop down menu. */
 function dispalyPaymentOptionFields() {
   if (paymentMethodDropDownMenu.value === 'credit-card') {
     creditCardDiv.hidden = false;
@@ -116,6 +129,7 @@ function dispalyPaymentOptionFields() {
 
 formElement.addEventListener('submit', validateForm);
 
+/** Validates the data entered into the form when the user submits the form */
 function validateForm(event) {
   if (nameIsValid(event)) {
     handleValidInput(nameField);
@@ -158,6 +172,11 @@ function validateForm(event) {
 
 nameField.addEventListener('keyup', nameIsValid);
 
+/**
+ * Checks validation for the name field and displays visual conformation if it passed or failed. A validation fail will display a reason for its failure.
+ * @param {Object} event - The event object passed to the function.
+ * @returns {boolean} True or false if the name is valid.
+ */
 function nameIsValid(event) {
   const name = nameField.value;
 
@@ -173,6 +192,11 @@ function nameIsValid(event) {
 
 emailField.addEventListener('keyup', emailIsValid);
 
+/**
+ * Checks validation for the email field and displays visual conformation if it passed or failed. A validation fail will display a reason for its failure.
+ * @param {Object} event - The event object passed to the function.
+ * @returns {boolean} True or false if the email is valid.
+ */
 function emailIsValid(event) {
   const email = emailField.value;
 
@@ -192,6 +216,11 @@ function emailIsValid(event) {
 
 activitiesBoxDiv.addEventListener('change', registerForActivitiesIsChecked);
 
+/**
+ * Checks if at least one activity has been checked by the user and will display a visual indicator. If no activity is checked a message will display requiring one.
+ * @param {Object} event - The event object passed to the function.
+ * @returns {boolean} True or false if an activity has been checked.
+ */
 function registerForActivitiesIsChecked(event) {
   const checkboxes = document.querySelectorAll('#activities-box [type="checkbox"]');
   let isChecked = false;
@@ -212,6 +241,11 @@ function registerForActivitiesIsChecked(event) {
 
 creditCardNumberField.addEventListener('keyup', creditCardNumberIsValid);
 
+/**
+ * Checks validation for the credit card number field and displays visual conformation if it passed or failed. A validation fail will display a reason for its failure.
+ * @param {Object} event - The event object passed to the function.
+ * @returns {boolean} True or false if the credit card number is valid.
+ */
 function creditCardNumberIsValid(event) {
   const creditCardNumber = creditCardNumberField.value;
 
@@ -227,6 +261,11 @@ function creditCardNumberIsValid(event) {
 
 zipCodeField.addEventListener('keyup', zipCodeIsValid);
 
+/**
+ * Checks validation for the zip code field and displays visual conformation if it passed or failed. A validation fail will display a reason for its failure.
+ * @param {Object} event - The event object passed to the function.
+ * @returns {boolean} True or false if the zip code is valid.
+ */
 function zipCodeIsValid(event) {
   const zipCode = zipCodeField.value;
 
@@ -242,6 +281,11 @@ function zipCodeIsValid(event) {
 
 cvvField.addEventListener('keyup', cvvIsValid);
 
+/**
+ * Checks validation for the cvv field and displays visual conformation if it passed or failed. A validation fail will display a reason for its failure.
+ * @param {Object} event - The event object passed to the function.
+ * @returns {boolean} True or false if the cvv is valid.
+ */
 function cvvIsValid(event) {
   const cvv = cvvField.value;
 
@@ -255,12 +299,21 @@ function cvvIsValid(event) {
   return isValid;
 }
 
+/**
+ * Displays a visual notification indicating valid input.
+ * @param {Object} element - The input who's parent element is used to remove the invalid data notification, add the valid data notification, and hide the hint message.
+ */
 function handleValidInput(element) {
   element.parentElement.classList.remove('not-valid');
   element.parentElement.classList.add('valid');
   element.parentElement.lastElementChild.style.display = 'none';
 }
 
+/**
+ * Displays a visual notification indicating invalid input.
+ * @param {Object} element - The input who's parent element is used to remove the valid data notification, add the invalid data notification, and display the hint message.
+ * @param {Object} event - The event object passed to the function.
+ */
 function handleInvalidInput(element, event) {
   event.preventDefault();
   element.parentElement.classList.remove('valid');
