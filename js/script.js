@@ -6,7 +6,6 @@ const designDropDownMenu = document.querySelector('#design');
 const registerForActivitesFieldset = document.querySelector('#activities');
 const activities = document.querySelectorAll('#activities-box [type="checkbox"]');
 const paymentMethodDropDownMenu = document.querySelector('#payment');
-const creditCArdOptionElement = paymentMethodDropDownMenu.querySelector('option[value="credit-card"]');
 const creditCardDiv = document.querySelector('#credit-card');
 const paypalDiv = document.querySelector('#paypal');
 const bitcoinDiv = document.querySelector('#bitcoin');
@@ -17,12 +16,20 @@ const zipCodeField = document.querySelector('#zip');
 const cvvField = document.querySelector('#cvv');
 const activitiesBoxDiv = document.querySelector('#activities-box');
 
-nameField.focus();
-otherJobRoleField.hidden = true;
-colorDropDownMenu.disabled = true;
-creditCArdOptionElement.selected = true;
-paypalDiv.hidden = true;
-bitcoinDiv.hidden = true;
+initialSetting();
+
+/** Sets the initial setting when the page loads. */
+function initialSetting() {
+  const creditCArdOptionElement = paymentMethodDropDownMenu.querySelector('option[value="credit-card"]');
+
+  nameField.focus();
+  otherJobRoleField.hidden = true;
+  colorDropDownMenu.disabled = true;
+  creditCArdOptionElement.selected = true;
+  paypalDiv.hidden = true;
+  bitcoinDiv.hidden = true;
+}
+
 styleFocusStatesOfActivities();
 
 /** Makes focus states for each activity more apparent. */
