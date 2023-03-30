@@ -194,20 +194,20 @@ activitiesBoxDiv.addEventListener('change', registerForActivitiesIsChecked);
 
 function registerForActivitiesIsChecked(event) {
   const checkboxes = document.querySelectorAll('#activities-box [type="checkbox"]');
-  let isValid = false;
+  let isChecked = false;
 
   for (const checkbox of checkboxes) {
     if (checkbox.checked) {
-      isValid = true;
+      isChecked = true;
     }
   }
 
-  if (isValid) {
+  if (isChecked) {
     handleValidInput(activitiesBoxDiv);
   } else {
     handleInvalidInput(activitiesBoxDiv, event);
   }
-  return isValid;
+  return isChecked;
 }
 
 creditCardNumberField.addEventListener('keyup', creditCardNumberIsValid);
