@@ -270,11 +270,11 @@ function cvvIsValid() {
  * @param {boolean} isValid - Is the user input valid or invalid.
  * @param {Element} elementToBeValidated
  */
-function handleInputValidation(isValid, elementToBeValidated) {
+function handleInputValidation(isValid, validatedElement) {
   if (isValid) {
-    handleValidInput(elementToBeValidated);
+    handleValidInput(validatedElement);
   } else {
-    handleInvalidInput(elementToBeValidated, event);
+    handleInvalidInput(validatedElement, event);
   }
 }
 
