@@ -164,7 +164,6 @@ nameField.addEventListener('keyup', nameIsValid);
 
 /**
  * Checks validation for the name field and displays visual conformation if it passed or failed. A validation fail will display a reason for its failure.
- * @param {Object} event - The event object passed to the function.
  * @returns {boolean} True or false if the name is valid.
  */
 function nameIsValid() {
@@ -179,7 +178,6 @@ emailField.addEventListener('keyup', emailIsValid);
 
 /**
  * Checks validation for the email field and displays visual conformation if it passed or failed. A validation fail will display a reason for its failure.
- * @param {Object} event - The event object passed to the function.
  * @returns {boolean} True or false if the email is valid.
  */
 function emailIsValid() {
@@ -203,7 +201,6 @@ activitiesBoxDiv.addEventListener('change', registerForActivitiesIsChecked);
 
 /**
  * Checks if at least one activity has been checked by the user and will display a visual indicator. If no activity is checked a message will display requiring one.
- * @param {Object} event - The event object passed to the function.
  * @returns {boolean} True or false if an activity has been checked.
  */
 function registerForActivitiesIsChecked() {
@@ -224,7 +221,6 @@ creditCardNumberField.addEventListener('keyup', creditCardNumberIsValid);
 
 /**
  * Checks validation for the credit card number field and displays visual conformation if it passed or failed. A validation fail will display a reason for its failure.
- * @param {Object} event - The event object passed to the function.
  * @returns {boolean} True or false if the credit card number is valid.
  */
 function creditCardNumberIsValid() {
@@ -239,7 +235,6 @@ zipCodeField.addEventListener('keyup', zipCodeIsValid);
 
 /**
  * Checks validation for the zip code field and displays visual conformation if it passed or failed. A validation fail will display a reason for its failure.
- * @param {Object} event - The event object passed to the function.
  * @returns {boolean} True or false if the zip code is valid.
  */
 function zipCodeIsValid() {
@@ -254,7 +249,6 @@ cvvField.addEventListener('keyup', cvvIsValid);
 
 /**
  * Checks validation for the cvv field and displays visual conformation if it passed or failed. A validation fail will display a reason for its failure.
- * @param {Object} event - The event object passed to the function.
  * @returns {boolean} True or false if the cvv is valid.
  */
 function cvvIsValid() {
@@ -267,8 +261,8 @@ function cvvIsValid() {
 
 /**
  * Calls the handleValidInput function if the data is valid or calls the handleInvalidInput function if it is not.
- * @param {boolean} isValid - Is the user input valid or invalid.
- * @param {Element} elementToBeValidated
+ * @param {boolean} isValid - True or false if the element passed validation.
+ * @param {Element} validatedElement - Element that was validated.
  */
 function handleInputValidation(isValid, validatedElement) {
   if (isValid) {
@@ -280,7 +274,7 @@ function handleInputValidation(isValid, validatedElement) {
 
 /**
  * Displays a visual notification indicating valid input.
- * @param {Object} element - The input who's parent element is used to remove the invalid data notification, add the valid data notification, and hide the hint message.
+ * @param {Element} element - The input who's parent element is used to remove the invalid data notification, add the valid data notification, and hide the hint message.
  */
 function handleValidInput(element) {
   element.parentElement.classList.remove('not-valid');
@@ -290,7 +284,7 @@ function handleValidInput(element) {
 
 /**
  * Displays a visual notification indicating invalid input.
- * @param {Object} element - The input who's parent element is used to remove the valid data notification, add the invalid data notification, and display the hint message.
+ * @param {Element} element - The input who's parent element is used to remove the valid data notification, add the invalid data notification, and display the hint message.
  * @param {Object} event - The event object passed to the function.
  */
 function handleInvalidInput(element, event) {
