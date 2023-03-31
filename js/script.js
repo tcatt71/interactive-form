@@ -192,6 +192,8 @@ function emailIsValid() {
 
   if (email === '') {
     emailHint.textContent = 'Please enter an email address';
+  } else {
+    emailHint.textContent = 'Email address must be formatted correctly';
   }
 
   return isValid;
