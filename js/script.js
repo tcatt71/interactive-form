@@ -155,11 +155,8 @@ function validateForm(event) {
    */
   function handleElementValidation(elementToBeValidated, validationFunc) {
     const isValid = validationFunc(event);
-    if (isValid) {
-      handleValidInput(elementToBeValidated);
-    } else {
-      handleInvalidInput(elementToBeValidated, event);
-    }
+
+    handleInputValidation(isValid, elementToBeValidated);
   }
 }
 
@@ -170,16 +167,11 @@ nameField.addEventListener('keyup', nameIsValid);
  * @param {Object} event - The event object passed to the function.
  * @returns {boolean} True or false if the name is valid.
  */
-function nameIsValid(event) {
+function nameIsValid() {
   const name = nameField.value;
-
   const isValid = /\S/.test(name)
 
-  if (isValid) {
-    handleValidInput(nameField);
-  } else {
-    handleInvalidInput(nameField, event);
-  }
+  handleInputValidation(isValid, nameField);
   return isValid;
 }
 
@@ -190,20 +182,18 @@ emailField.addEventListener('keyup', emailIsValid);
  * @param {Object} event - The event object passed to the function.
  * @returns {boolean} True or false if the email is valid.
  */
-function emailIsValid(event) {
+function emailIsValid() {
   const email = emailField.value;
-
   const isValid = /^\w+\.?\w+@\w+\.(com|net|org)$/i.test(email);
 
-  if (isValid) {
-    handleValidInput(emailField);
-  } else if (email === '') {
-    emailField.parentElement.lastElementChild.textContent = 'Please enter an email address';
-    handleInvalidInput(emailField, event);
-  } else {
-    emailField.parentElement.lastElementChild.textContent = 'Email address must be formatted correctly';
-    handleInvalidInput(emailField, event);
+  handleInputValidation(isValid, emailField);
+
+  const emailHint = document.querySelector('#email-hint');
+
+  if (email === '') {
+    emailHint.textContent = 'Please enter an email address';
   }
+
   return isValid;
 }
 
@@ -214,7 +204,7 @@ activitiesBoxDiv.addEventListener('change', registerForActivitiesIsChecked);
  * @param {Object} event - The event object passed to the function.
  * @returns {boolean} True or false if an activity has been checked.
  */
-function registerForActivitiesIsChecked(event) {
+function registerForActivitiesIsChecked() {
   const checkboxes = document.querySelectorAll('#activities-box [type="checkbox"]');
   let isChecked = false;
 
@@ -224,11 +214,7 @@ function registerForActivitiesIsChecked(event) {
     }
   }
 
-  if (isChecked) {
-    handleValidInput(activitiesBoxDiv);
-  } else {
-    handleInvalidInput(activitiesBoxDiv, event);
-  }
+  handleInputValidation(isChecked, activitiesBoxDiv);
   return isChecked;
 }
 
@@ -239,16 +225,11 @@ creditCardNumberField.addEventListener('keyup', creditCardNumberIsValid);
  * @param {Object} event - The event object passed to the function.
  * @returns {boolean} True or false if the credit card number is valid.
  */
-function creditCardNumberIsValid(event) {
+function creditCardNumberIsValid() {
   const creditCardNumber = creditCardNumberField.value;
-
   const isValid = /^\d{13,16}$/.test(creditCardNumber)
 
-  if (isValid) {
-    handleValidInput(creditCardNumberField);
-  } else {
-    handleInvalidInput(creditCardNumberField, event);
-  }
+  handleInputValidation(isValid, creditCardNumberField);
   return isValid;
 }
 
@@ -259,16 +240,11 @@ zipCodeField.addEventListener('keyup', zipCodeIsValid);
  * @param {Object} event - The event object passed to the function.
  * @returns {boolean} True or false if the zip code is valid.
  */
-function zipCodeIsValid(event) {
+function zipCodeIsValid() {
   const zipCode = zipCodeField.value;
-
   const isValid = /^\d{5}$/.test(zipCode);
 
-  if (isValid) {
-    handleValidInput(zipCodeField);
-  } else {
-    handleInvalidInput(zipCodeField, event);
-  }
+  handleInputValidation(isValid, zipCodeField);
   return isValid;
 }
 
@@ -279,17 +255,25 @@ cvvField.addEventListener('keyup', cvvIsValid);
  * @param {Object} event - The event object passed to the function.
  * @returns {boolean} True or false if the cvv is valid.
  */
-function cvvIsValid(event) {
+function cvvIsValid() {
   const cvv = cvvField.value;
-
   const isValid = /^\d{3}$/.test(cvv);
 
-  if (isValid) {
-    handleValidInput(cvvField);
-  } else {
-    handleInvalidInput(cvvField, event);
-  }
+  handleInputValidation(isValid, cvvField);
   return isValid;
+}
+
+/**
+ * Calls the handleValidInput function if the data is valid or calls the handleInvalidInput function if it is not.
+ * @param {boolean} isValid - Is the user input valid or invalid.
+ * @param {Element} elementToBeValidated
+ */
+function handleInputValidation(isValid, elementToBeValidated) {
+  if (isValid) {
+    handleValidInput(elementToBeValidated);
+  } else {
+    handleInvalidInput(elementToBeValidated, event);
+  }
 }
 
 /**
