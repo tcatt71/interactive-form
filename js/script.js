@@ -138,41 +138,27 @@ formElement.addEventListener('submit', validateForm);
 
 /** Validates the data entered into the form when the user submits the form */
 function validateForm(event) {
-  if (nameIsValid(event)) {
-    handleValidInput(nameField);
-  } else {
-    handleInvalidInput(nameField, event);
-  }
-
-  if (emailIsValid(event)) {
-    handleValidInput(emailField);
-  } else {
-    handleInvalidInput(emailField, event);
-  }
-
-  if (registerForActivitiesIsChecked(event)) {
-    handleValidInput(activitiesBoxDiv);
-  } else {
-    handleInvalidInput(activitiesBoxDiv, event);
-  }
+  handleElementValidation(nameField, nameIsValid);
+  handleElementValidation(emailField, emailIsValid);
+  handleElementValidation(activitiesBoxDiv, registerForActivitiesIsChecked);
 
   if (!creditCardDiv.hidden) {
-    if (creditCardNumberIsValid(event)) {
-      handleValidInput(creditCardNumberField);
-    } else {
-      handleInvalidInput(creditCardNumberField, event);
-    }
+    handleElementValidation(creditCardNumberField, creditCardNumberIsValid);
+    handleElementValidation(zipCodeField, zipCodeIsValid);
+    handleElementValidation(cvvField, cvvIsValid);
+  }
 
-    if (zipCodeIsValid(event)) {
-      handleValidInput(zipCodeField);
+  /**
+   * Checks element to be validated and displays visual pass or fail notifications and help text.
+   * @param {Element} elementToBeValidated
+   * @param {callback} validationFunc - Function for validating the element.
+   */
+  function handleElementValidation(elementToBeValidated, validationFunc) {
+    const isValid = validationFunc(event);
+    if (isValid) {
+      handleValidInput(elementToBeValidated);
     } else {
-      handleInvalidInput(zipCodeField, event);
-    }
-
-    if (cvvIsValid(event)) {
-      handleValidInput(cvvField);
-    } else {
-      handleInvalidInput(cvvField, event);
+      handleInvalidInput(elementToBeValidated, event);
     }
   }
 }
